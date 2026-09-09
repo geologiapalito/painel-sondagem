@@ -1,0 +1,1 @@
+Substitua diariamente apenas painel.png. A página verifica uma nova imagem a cada 2 minutos. Não publique dados operacionais confidenciais em hospedagem pública.
