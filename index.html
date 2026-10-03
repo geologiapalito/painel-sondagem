@@ -1,1 +1,87 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate"><title>Painel Sondagem Serabi</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061f32}body{display:flex;align-items:center;justify-content:center}img{width:100vw;height:100vh;object-fit:contain;display:block}</style></head><body><img id="painel" src="painel.png"><script>function atualizar(){document.getElementById('painel').src='painel.png?t='+Date.now()}setInterval(atualizar,120000)</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+
+<title>Painéis Geologia Serabi</title>
+
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#061f32;
+}
+
+body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+img{
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    object-fit:contain;
+    display:block;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+
+img.ativo{
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<img id="painel1" class="ativo" src="painel.png">
+<img id="painel2" src="painel2.png">
+
+<script>
+
+let atual = 1;
+
+// Alterna os painéis a cada 30 segundos
+function alternarPainel(){
+
+    const p1 = document.getElementById('painel1');
+    const p2 = document.getElementById('painel2');
+
+    if(atual === 1){
+        p1.classList.remove('ativo');
+        p2.classList.add('ativo');
+        atual = 2;
+    }else{
+        p2.classList.remove('ativo');
+        p1.classList.add('ativo');
+        atual = 1;
+    }
+}
+
+setInterval(alternarPainel,30000);
+
+
+// Atualiza as imagens a cada 2 minutos
+function atualizarImagens(){
+
+    const tempo = Date.now();
+
+    document.getElementById('painel1').src =
+        'painel.png?t=' + tempo;
+
+    document.getElementById('painel2').src =
+        'painel2.png?t=' + tempo;
+}
+
+setInterval(atualizarImagens,120000);
+
+</script>
+
+</body>
+</html>
