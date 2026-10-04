@@ -1,87 +1,66 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
-<title>Painéis Geologia Serabi</title>
+  <title>Painel Sondagem Serabi</title>
 
-<style>
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#061f32;
-}
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #061f32;
+    }
 
-body{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-img{
-    position:absolute;
-    width:100vw;
-    height:100vh;
-    object-fit:contain;
-    display:block;
-    opacity:0;
-    transition:opacity 1s ease-in-out;
-}
-
-img.ativo{
-    opacity:1;
-}
-</style>
+    img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
 
-<img id="painel1" class="ativo" src="painel.png">
-<img id="painel2" src="painel2.png">
+  <img id="painel" src="painel.png">
 
-<script>
+  <script>
+    const imagens = [
+      "painel.png",
+      "painel2.png",
+      "painel3.png"
+    ];
 
-let atual = 1;
+    let atual = 0;
 
-// Alterna os painéis a cada 30 segundos
-function alternarPainel(){
+    function mostrarPainel() {
+      const imagem = document.getElementById("painel");
 
-    const p1 = document.getElementById('painel1');
-    const p2 = document.getElementById('painel2');
+      imagem.src =
+        imagens[atual] + "?t=" + Date.now();
 
-    if(atual === 1){
-        p1.classList.remove('ativo');
-        p2.classList.add('ativo');
-        atual = 2;
-    }else{
-        p2.classList.remove('ativo');
-        p1.classList.add('ativo');
-        atual = 1;
+      atual = (atual + 1) % imagens.length;
     }
-}
 
-setInterval(alternarPainel,30000);
+    // Troca de painel a cada 30 segundos
+    setInterval(mostrarPainel, 30000);
 
-
-// Atualiza as imagens a cada 2 minutos
-function atualizarImagens(){
-
-    const tempo = Date.now();
-
-    document.getElementById('painel1').src =
-        'painel.png?t=' + tempo;
-
-    document.getElementById('painel2').src =
-        'painel2.png?t=' + tempo;
-}
-
-setInterval(atualizarImagens,120000);
-
-</script>
+    // Atualiza imediatamente ao abrir
+    mostrarPainel();
+  </script>
 
 </body>
 </html>
